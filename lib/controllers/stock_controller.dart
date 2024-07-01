@@ -39,6 +39,32 @@ class StockController {
     return response;
   }
 
+  Future<http.Response> updateStock(
+    {required String id,
+    required String name,
+    required int qty,
+    required String attr,
+    required int weight,
+    required String issuer}) async {
+    var response = await http.put(Uri.parse('$url/$id'),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: jsonEncode({
+      'name': name,
+      'qty': qty,
+      'attr': attr,
+      'weight': weight,
+      'issuer': issuer,
+    }));
+
+    if (response.statusCode == 200) {
+      return response;
+    } else {
+      throw Exception('Failed to update stock');
+    }
+  }
+
   Future<void> deleteStock(String id) async {
     var response = await http.delete(Uri.parse('$url/$id'));
     if (response.statusCode != 204){
