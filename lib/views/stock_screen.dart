@@ -77,7 +77,7 @@ class _StockScreenState extends State<StockScreen> {
               ),
               TextField(
                 controller: _weightController,
-                decoration: InputDecoration(labelText: 'Berat'),
+                decoration: InputDecoration(labelText: 'Berat', suffix: Text('Kg')),
                 keyboardType: TextInputType.number,
               ),
             ],

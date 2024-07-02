@@ -118,7 +118,7 @@ class _AddStockState extends State<AddStock> {
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.only(right: 20, left: 10),
                   labelText: 'Berat',
-                  suffix: Text('Kilo'),
+                  suffix: Text('Kg'),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
