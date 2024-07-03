@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:warehousing_app/views/add/add_product.dart';
+import 'package:warehousing_app/views/add/add_sales.dart';
 import 'package:warehousing_app/views/add/add_stock.dart';
 import './product_screen.dart';
 import './sales_screen.dart';
@@ -17,7 +18,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
   static List<Widget> _widgetOptions(ValueNotifier<bool> notifier) => <Widget>[
     StockScreen(updateNotifier: notifier),
     ProductScreen(updateNotifier: notifier,),
-    SalesScreen(),
+    SalesScreen(updateNotifier: notifier),
   ];
 
   @override
@@ -46,6 +47,13 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
         context,
         MaterialPageRoute(
           builder: (context) => AddProduct(),
+        ),
+      );
+    } else if (_tabController?.index == 2) {
+      result = await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => AddSale(),
         ),
       );
     }
