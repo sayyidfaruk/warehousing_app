@@ -158,6 +158,7 @@ class _ProductScreenState extends State<ProductScreen> {
       valueListenable: widget.updateNotifier,
       builder: (context, value, child) {
         return Container(
+          color: Colors.amber[200],
           child: Center(
             child: FutureBuilder<List<Product>>(
               future: futureProducts,
@@ -179,7 +180,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         margin:
                             EdgeInsets.only(top: 10.0, left: 16.0, right: 16.0),
                         decoration: BoxDecoration(
-                          color: Colors.amber[200],
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: ListTile(

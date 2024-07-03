@@ -11,15 +11,18 @@ class MainScreen extends StatefulWidget {
   _MainScreenState createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateMixin {
+class _MainScreenState extends State<MainScreen>
+    with SingleTickerProviderStateMixin {
   final ValueNotifier<bool> _stockUpdateNotifier = ValueNotifier<bool>(false);
   TabController? _tabController;
 
   static List<Widget> _widgetOptions(ValueNotifier<bool> notifier) => <Widget>[
-    StockScreen(updateNotifier: notifier),
-    ProductScreen(updateNotifier: notifier,),
-    SalesScreen(updateNotifier: notifier),
-  ];
+        StockScreen(updateNotifier: notifier),
+        ProductScreen(
+          updateNotifier: notifier,
+        ),
+        SalesScreen(updateNotifier: notifier),
+      ];
 
   @override
   void initState() {
@@ -59,7 +62,8 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
     }
 
     if (result == true) {
-      _stockUpdateNotifier.value = !_stockUpdateNotifier.value; // Memicu pembaruan
+      _stockUpdateNotifier.value =
+          !_stockUpdateNotifier.value; // Memicu pembaruan
     }
   }
 
@@ -69,13 +73,29 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Bakery Warehouse'),
+          backgroundColor: Colors.black,
+          title: Image.asset(
+            'assets/icons/icon.png',
+            height: 100,
+          ),
           bottom: TabBar(
+            labelColor: Colors.white,
+            unselectedLabelColor: Colors.white70,
+            indicatorColor: Colors.white,
             controller: _tabController,
             tabs: [
-              Tab(text: 'Stocks'),
-              Tab(text: 'Products'),
-              Tab(text: 'Sales'),
+              Tab(
+                text: 'Stocks',
+                icon: Icon(Icons.store),
+              ),
+              Tab(
+                text: 'Products',
+                icon: Icon(Icons.shopping_bag),
+              ),
+              Tab(
+                text: 'Sales',
+                icon: Icon(Icons.attach_money),
+              ),
             ],
           ),
         ),
@@ -84,10 +104,13 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
           children: _widgetOptions(_stockUpdateNotifier),
         ),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.grey,
+          backgroundColor: Colors.black,
           onPressed: navigateToAdd,
           tooltip: 'Add',
-          child: Icon(Icons.add, color: Colors.white,),
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
         ),
       ),
     );
