@@ -101,9 +101,9 @@ class _ProductScreenState extends State<ProductScreen> {
                     id: product.id,
                     name: _nameController.text,
                     price: num.parse(_priceController.text),
-                    qty: int.parse(_qtyController.text),
+                    qty: num.parse(_qtyController.text),
                     attr: _attrController.text,
-                    weight: int.parse(_weightController.text),
+                    weight: num.parse(_weightController.text),
                     issuer: product.issuer,
                   );
                   Navigator.of(context).pop();

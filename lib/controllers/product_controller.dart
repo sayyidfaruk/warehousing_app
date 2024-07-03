@@ -21,9 +21,9 @@ class ProductController {
   Future<http.Response> postData(
     {required String name,
     required num price,
-    required int qty,
+    required num qty,
     required String attr,
-    required int weight,
+    required num weight,
     required String issuer}) async {
     var response = await http.post(Uri.parse(url), 
     headers: {
@@ -46,9 +46,9 @@ class ProductController {
     {required String id,
     required num price,
     required String name,
-    required int qty,
+    required num qty,
     required String attr,
-    required int weight,
+    required num weight,
     required String issuer}) async {
     var response = await http.put(Uri.parse('$url/$id'),
     headers: {

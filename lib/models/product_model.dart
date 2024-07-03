@@ -2,9 +2,9 @@ class Product {
   final String id;
   final String name;
   final num price;
-  final int qty;
+  final num qty;
   final String attr;
-  final int weight;
+  final num weight;
   final String issuer;
 
   Product({
