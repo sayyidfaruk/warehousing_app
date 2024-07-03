@@ -75,7 +75,10 @@ class _SalesScreenState extends State<SalesScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Edit sale'),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          title: Text('Edit Sale'),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -119,12 +122,22 @@ class _SalesScreenState extends State<SalesScreen> {
           ),
           actions: [
             TextButton(
+              style: ButtonStyle(
+                  foregroundColor: WidgetStatePropertyAll(Colors.black)),
               onPressed: () {
                 Navigator.of(context).pop();
               },
               child: Text('Cancel'),
             ),
             TextButton(
+              style: ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll(Colors.amber[200]),
+                foregroundColor: WidgetStatePropertyAll(Colors.black),
+                shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
+                ),
+              ),
               onPressed: () async {
                 try {
                   await _saleController.updatesale(
@@ -185,8 +198,14 @@ class _SalesScreenState extends State<SalesScreen> {
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: ListTile(
+                            leading: Text(
+                              (index + 1).toString(),
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
+                            ),
                             title: Text(sale.buyer),
-                            subtitle: Text('${sale.phone} ${sale.status}'),
+                            subtitle: Text('${sale.date} || ${sale.status}'),
                             trailing: IconButton(
                               onPressed: () => _deletesale(sale.id),
                               icon: Icon(Icons.delete, color: Colors.red),

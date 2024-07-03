@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:warehousing_app/controllers/product_controller.dart';
 import 'package:warehousing_app/models/product_model.dart';
 
@@ -48,17 +49,30 @@ class _ProductScreenState extends State<ProductScreen> {
     }
   }
 
+  String formatRupiah(num number) {
+    final formatter = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp. ', decimalDigits: 0);
+    return formatter.format(number);
+  }
+
   void _showEditDialog(Product product) {
-    final TextEditingController _nameController = TextEditingController(text: product.name);
-    final TextEditingController _priceController = TextEditingController(text: product.price.toString());
-    final TextEditingController _qtyController = TextEditingController(text: product.qty.toString());
-    final TextEditingController _attrController = TextEditingController(text: product.attr);
-    final TextEditingController _weightController = TextEditingController(text: product.weight.toString());
+    final TextEditingController _nameController =
+        TextEditingController(text: product.name);
+    final TextEditingController _priceController =
+        TextEditingController(text: product.price.toString());
+    final TextEditingController _qtyController =
+        TextEditingController(text: product.qty.toString());
+    final TextEditingController _attrController =
+        TextEditingController(text: product.attr);
+    final TextEditingController _weightController =
+        TextEditingController(text: product.weight.toString());
 
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
           title: Text('Edit Product'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -69,7 +83,9 @@ class _ProductScreenState extends State<ProductScreen> {
               ),
               TextField(
                 controller: _priceController,
-                decoration: InputDecoration(labelText: 'Harga', prefix: Text('Rp. ')),
+                decoration:
+                    InputDecoration(labelText: 'Harga', prefix: Text('Rp. ')),
+                keyboardType: TextInputType.number,
               ),
               TextField(
                 controller: _qtyController,
@@ -82,19 +98,30 @@ class _ProductScreenState extends State<ProductScreen> {
               ),
               TextField(
                 controller: _weightController,
-                decoration: InputDecoration(labelText: 'Berat', suffix: Text('Kg')),
+                decoration:
+                    InputDecoration(labelText: 'Berat', suffix: Text('Kg')),
                 keyboardType: TextInputType.number,
               ),
             ],
           ),
           actions: [
             TextButton(
+              style: ButtonStyle(
+                  foregroundColor: WidgetStatePropertyAll(Colors.black)),
               onPressed: () {
                 Navigator.of(context).pop();
               },
               child: Text('Cancel'),
             ),
             TextButton(
+              style: ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll(Colors.amber[200]),
+                foregroundColor: WidgetStatePropertyAll(Colors.black),
+                shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
+                ),
+              ),
               onPressed: () async {
                 try {
                   await _productController.updateProduct(
@@ -141,21 +168,30 @@ class _ProductScreenState extends State<ProductScreen> {
                   return Text('${snapshot.error}');
                 } else if (snapshot.hasData) {
                   List<Product> products = snapshot.data!;
-                  List<Product> filteredProducts =
-                      products.where((product) => product.issuer == 'sayyid').toList();
+                  List<Product> filteredProducts = products
+                      .where((product) => product.issuer == 'sayyid')
+                      .toList();
                   return ListView.builder(
                     itemCount: filteredProducts.length,
                     itemBuilder: (context, index) {
                       Product product = filteredProducts[index];
                       return Container(
-                        margin: EdgeInsets.only(top: 10.0, left: 16.0, right: 16.0),
+                        margin:
+                            EdgeInsets.only(top: 10.0, left: 16.0, right: 16.0),
                         decoration: BoxDecoration(
                           color: Colors.amber[200],
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: ListTile(
+                          leading: Text(
+                            (index + 1).toString(),
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
                           title: Text(product.name),
-                          subtitle: Text('Quantity: ${product.qty.toString()} ${product.attr}'),
+                          subtitle: Text(
+                              '${formatRupiah(product.price)} || sisa ${product.qty.toString()} ${product.attr}'),
                           trailing: IconButton(
                             onPressed: () => _deleteStock(product.id),
                             icon: Icon(Icons.delete, color: Colors.red),

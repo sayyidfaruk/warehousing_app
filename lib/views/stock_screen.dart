@@ -49,15 +49,22 @@ class _StockScreenState extends State<StockScreen> {
   }
 
   void _showEditDialog(Stock stock) {
-    final TextEditingController _nameController = TextEditingController(text: stock.name);
-    final TextEditingController _qtyController = TextEditingController(text: stock.qty.toString());
-    final TextEditingController _attrController = TextEditingController(text: stock.attr);
-    final TextEditingController _weightController = TextEditingController(text: stock.weight.toString());
+    final TextEditingController _nameController =
+        TextEditingController(text: stock.name);
+    final TextEditingController _qtyController =
+        TextEditingController(text: stock.qty.toString());
+    final TextEditingController _attrController =
+        TextEditingController(text: stock.attr);
+    final TextEditingController _weightController =
+        TextEditingController(text: stock.weight.toString());
 
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
           title: Text('Edit Stock'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -77,19 +84,32 @@ class _StockScreenState extends State<StockScreen> {
               ),
               TextField(
                 controller: _weightController,
-                decoration: InputDecoration(labelText: 'Berat', suffix: Text('Kg')),
+                decoration:
+                    InputDecoration(labelText: 'Berat', suffix: Text('Kg')),
                 keyboardType: TextInputType.number,
               ),
             ],
           ),
           actions: [
             TextButton(
+              style: ButtonStyle(
+                foregroundColor: WidgetStatePropertyAll(Colors.black)
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
               child: Text('Cancel'),
             ),
             TextButton(
+              style: ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll(Colors.amber[200]),
+                foregroundColor: WidgetStatePropertyAll(Colors.black),
+                shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)
+                  ),
+                ),
+              ),
               onPressed: () async {
                 try {
                   await _stockController.updateStock(
@@ -135,21 +155,30 @@ class _StockScreenState extends State<StockScreen> {
                   return Text('${snapshot.error}');
                 } else if (snapshot.hasData) {
                   List<Stock> stocks = snapshot.data!;
-                  List<Stock> filteredStocks =
-                      stocks.where((stock) => stock.issuer == 'sayyid').toList();
+                  List<Stock> filteredStocks = stocks
+                      .where((stock) => stock.issuer == 'sayyid')
+                      .toList();
                   return ListView.builder(
                     itemCount: filteredStocks.length,
                     itemBuilder: (context, index) {
                       Stock stock = filteredStocks[index];
                       return Container(
-                        margin: EdgeInsets.only(top: 10.0, left: 16.0, right: 16.0),
+                        margin:
+                            EdgeInsets.only(top: 10.0, left: 16.0, right: 16.0),
                         decoration: BoxDecoration(
                           color: Colors.amber[200],
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: ListTile(
+                          leading: Text(
+                            (index + 1).toString(),
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
                           title: Text(stock.name),
-                          subtitle: Text('Quantity: ${stock.qty.toString()} ${stock.attr}'),
+                          subtitle: Text(
+                              'Sisa ${stock.qty.toString()} ${stock.attr}'),
                           trailing: IconButton(
                             onPressed: () => _deleteStock(stock.id),
                             icon: Icon(Icons.delete, color: Colors.red),
