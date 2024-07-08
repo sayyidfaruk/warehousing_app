@@ -58,14 +58,14 @@ class _AddProductState extends State<AddProduct> {
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.production_quantity_limits),
-                  labelText: 'Nama',
+                  labelText: 'Nama Produk',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Mohon masukkan nama barang';
+                    return 'Mohon masukkan nama produk';
                   }
                   return null;
                 },
