@@ -93,8 +93,7 @@ class _StockScreenState extends State<StockScreen> {
           actions: [
             TextButton(
               style: ButtonStyle(
-                foregroundColor: WidgetStatePropertyAll(Colors.black)
-              ),
+                  foregroundColor: WidgetStatePropertyAll(Colors.black)),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -106,8 +105,7 @@ class _StockScreenState extends State<StockScreen> {
                 foregroundColor: WidgetStatePropertyAll(Colors.black),
                 shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)
-                  ),
+                      borderRadius: BorderRadius.circular(15)),
                 ),
               ),
               onPressed: () async {
@@ -159,37 +157,41 @@ class _StockScreenState extends State<StockScreen> {
                   List<Stock> filteredStocks = stocks
                       .where((stock) => stock.issuer == 'sayyid')
                       .toList();
-                  return ListView.builder(
-                    itemCount: filteredStocks.length,
-                    itemBuilder: (context, index) {
-                      Stock stock = filteredStocks[index];
-                      return Container(
-                        margin:
-                            EdgeInsets.only(top: 10.0, left: 16.0, right: 16.0),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: ListTile(
-                          leading: Text(
-                            (index + 1).toString(),
-                            style: TextStyle(
-                              fontSize: 20,
+                  if (filteredStocks.isNotEmpty) {
+                    return ListView.builder(
+                      itemCount: filteredStocks.length,
+                      itemBuilder: (context, index) {
+                        Stock stock = filteredStocks[index];
+                        return Container(
+                          margin: EdgeInsets.only(
+                              top: 10.0, left: 16.0, right: 16.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: ListTile(
+                            leading: Text(
+                              (index + 1).toString(),
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
                             ),
+                            title: Text(stock.name),
+                            subtitle: Text(
+                                'Sisa ${stock.qty.toString()} ${stock.attr}'),
+                            trailing: IconButton(
+                              onPressed: () => _deleteStock(stock.id),
+                              icon: Icon(Icons.delete, color: Colors.red),
+                            ),
+                            contentPadding: EdgeInsets.only(right: 5, left: 15),
+                            onTap: () => _showEditDialog(stock),
                           ),
-                          title: Text(stock.name),
-                          subtitle: Text(
-                              'Sisa ${stock.qty.toString()} ${stock.attr}'),
-                          trailing: IconButton(
-                            onPressed: () => _deleteStock(stock.id),
-                            icon: Icon(Icons.delete, color: Colors.red),
-                          ),
-                          contentPadding: EdgeInsets.only(right: 5, left: 15),
-                          onTap: () => _showEditDialog(stock),
-                        ),
-                      );
-                    },
-                  );
+                        );
+                      },
+                    );
+                  } else {
+                    return Text('Tidak ada data');
+                  }
                 }
                 return Text('Tidak ada data');
               },

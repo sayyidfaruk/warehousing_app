@@ -31,7 +31,7 @@ class _AddSaleState extends State<AddSale> {
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Gagal menambahkan stok: $e'),
+            content: Text('Gagal menambahkan sale: $e'),
             backgroundColor: Colors.red,
           ),
         );
@@ -70,7 +70,7 @@ class _AddSaleState extends State<AddSale> {
                   controller: _buyerController,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                    hintText: 'Tuliskan nama pembeli',
+                    prefixIcon: Icon(Icons.person),
                     labelText: 'Pembeli',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
@@ -88,6 +88,7 @@ class _AddSaleState extends State<AddSale> {
                   controller: _phoneController,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.phone),
                     labelText: 'Phone',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
@@ -108,6 +109,7 @@ class _AddSaleState extends State<AddSale> {
                     child: TextFormField(
                       controller: _dateController,
                       decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.calendar_today),
                         labelText: 'Tanggal',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
@@ -126,6 +128,7 @@ class _AddSaleState extends State<AddSale> {
                 DropdownButtonFormField<String>(
                   value: _selectedStatus,
                   decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.assignment_turned_in),
                     labelText: 'Status',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),

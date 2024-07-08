@@ -55,8 +55,8 @@ class _AddStockState extends State<AddStock> {
                 controller: _nameController,
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
-                  hintText: 'Tuliskan nama barang',
-                  labelText: 'Nama',
+                  prefixIcon: Icon(Icons.inventory),
+                  labelText: 'Nama Barang',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
@@ -76,6 +76,7 @@ class _AddStockState extends State<AddStock> {
                       controller: _qtyController,
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.format_list_numbered),
                         labelText: 'Jumlah',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
@@ -96,6 +97,7 @@ class _AddStockState extends State<AddStock> {
                       controller: _attrController,
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.straighten),
                         labelText: 'Satuan',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
@@ -116,9 +118,9 @@ class _AddStockState extends State<AddStock> {
                 controller: _weightController,
                 textInputAction: TextInputAction.done,
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.only(right: 20, left: 10),
+                  prefixIcon: Icon(Icons.monitor_weight),
                   labelText: 'Berat',
-                  suffix: Text('Kg'),
+                  suffixText: 'Kg',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),

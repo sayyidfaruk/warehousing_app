@@ -5,10 +5,10 @@ class AddProduct extends StatefulWidget {
   const AddProduct({super.key});
 
   @override
-  State<AddProduct> createState() => _AddStockState();
+  State<AddProduct> createState() => _AddProductState();
 }
 
-class _AddStockState extends State<AddProduct> {
+class _AddProductState extends State<AddProduct> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _qtyController = TextEditingController();
@@ -57,7 +57,7 @@ class _AddStockState extends State<AddProduct> {
                 controller: _nameController,
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
-                  hintText: 'Tuliskan nama barang',
+                  prefixIcon: Icon(Icons.production_quantity_limits),
                   labelText: 'Nama',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
@@ -78,6 +78,7 @@ class _AddStockState extends State<AddProduct> {
                       controller: _qtyController,
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.format_list_numbered),
                         labelText: 'Jumlah',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
@@ -98,6 +99,7 @@ class _AddStockState extends State<AddProduct> {
                       controller: _attrController,
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.straighten),
                         labelText: 'Satuan',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
@@ -121,9 +123,9 @@ class _AddStockState extends State<AddProduct> {
                       controller: _weightController,
                       textInputAction: TextInputAction.done,
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(right: 20, left: 10),
+                        prefixIcon: Icon(Icons.monitor_weight),
                         labelText: 'Berat',
-                        suffix: Text('Kg'),
+                        suffixText: 'Kg',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                         ),
@@ -143,9 +145,14 @@ class _AddStockState extends State<AddProduct> {
                       controller: _priceController,
                       textInputAction: TextInputAction.done,
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(right: 20, left: 10),
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Text(
+                            'Rp',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                        ),
                         labelText: 'Harga',
-                        prefix: Text('Rp. '),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                         ),

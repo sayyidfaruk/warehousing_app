@@ -50,7 +50,8 @@ class _ProductScreenState extends State<ProductScreen> {
   }
 
   String formatRupiah(num number) {
-    final formatter = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp. ', decimalDigits: 0);
+    final formatter = NumberFormat.currency(
+        locale: 'id_ID', symbol: 'Rp. ', decimalDigits: 0);
     return formatter.format(number);
   }
 
@@ -172,37 +173,41 @@ class _ProductScreenState extends State<ProductScreen> {
                   List<Product> filteredProducts = products
                       .where((product) => product.issuer == 'sayyid')
                       .toList();
-                  return ListView.builder(
-                    itemCount: filteredProducts.length,
-                    itemBuilder: (context, index) {
-                      Product product = filteredProducts[index];
-                      return Container(
-                        margin:
-                            EdgeInsets.only(top: 10.0, left: 16.0, right: 16.0),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: ListTile(
-                          leading: Text(
-                            (index + 1).toString(),
-                            style: TextStyle(
-                              fontSize: 20,
+                  if (filteredProducts.isNotEmpty) {
+                    return ListView.builder(
+                      itemCount: filteredProducts.length,
+                      itemBuilder: (context, index) {
+                        Product product = filteredProducts[index];
+                        return Container(
+                          margin: EdgeInsets.only(
+                              top: 10.0, left: 16.0, right: 16.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: ListTile(
+                            leading: Text(
+                              (index + 1).toString(),
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
                             ),
+                            title: Text(product.name),
+                            subtitle: Text(
+                                '${formatRupiah(product.price)} || sisa ${product.qty.toString()} ${product.attr}'),
+                            trailing: IconButton(
+                              onPressed: () => _deleteStock(product.id),
+                              icon: Icon(Icons.delete, color: Colors.red),
+                            ),
+                            contentPadding: EdgeInsets.only(right: 5, left: 15),
+                            onTap: () => _showEditDialog(product),
                           ),
-                          title: Text(product.name),
-                          subtitle: Text(
-                              '${formatRupiah(product.price)} || sisa ${product.qty.toString()} ${product.attr}'),
-                          trailing: IconButton(
-                            onPressed: () => _deleteStock(product.id),
-                            icon: Icon(Icons.delete, color: Colors.red),
-                          ),
-                          contentPadding: EdgeInsets.only(right: 5, left: 15),
-                          onTap: () => _showEditDialog(product),
-                        ),
-                      );
-                    },
-                  );
+                        );
+                      },
+                    );
+                  } else {
+                    return Text('Tidak ada data');
+                  }
                 }
                 return Text('Tidak ada data');
               },
