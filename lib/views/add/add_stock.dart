@@ -22,9 +22,9 @@ class _AddStockState extends State<AddStock> {
       try {
         await _stockController.postData(
           name: _nameController.text,
-          qty: int.parse(_qtyController.text),
+          qty: num.parse(_qtyController.text),
           attr: _attrController.text,
-          weight: int.parse(_weightController.text),
+          weight: num.parse(_weightController.text),
           issuer: issuer,
         );
         Navigator.pop(context, true); // Kirim true saat sukses

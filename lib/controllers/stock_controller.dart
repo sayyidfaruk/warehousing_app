@@ -19,9 +19,9 @@ class StockController {
 
   Future<http.Response> postData(
     {required String name,
-    required int qty,
+    required num qty,
     required String attr,
-    required int weight,
+    required num weight,
     required String issuer}) async {
     var response = await http.post(Uri.parse(url), 
     headers: {
@@ -42,9 +42,9 @@ class StockController {
   Future<http.Response> updateStock(
     {required String id,
     required String name,
-    required int qty,
+    required num qty,
     required String attr,
-    required int weight,
+    required num weight,
     required String issuer}) async {
     var response = await http.put(Uri.parse('$url/$id'),
     headers: {

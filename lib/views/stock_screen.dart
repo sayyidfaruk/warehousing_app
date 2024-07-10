@@ -113,9 +113,9 @@ class _StockScreenState extends State<StockScreen> {
                   await _stockController.updateStock(
                     id: stock.id,
                     name: _nameController.text,
-                    qty: int.parse(_qtyController.text),
+                    qty: num.parse(_qtyController.text),
                     attr: _attrController.text,
-                    weight: int.parse(_weightController.text),
+                    weight: num.parse(_weightController.text),
                     issuer: stock.issuer,
                   );
                   Navigator.of(context).pop();
