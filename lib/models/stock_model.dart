@@ -18,7 +18,7 @@ class Stock {
     return Stock(
         id: json['id'],
         name: json['name'],
-        qty: (json['qty'] as num).toInt(),
+        qty: json['qty'],
         attr: json['attr'],
         weight: json['weight'],
         issuer: json['issuer']);
